@@ -1,10 +1,16 @@
 import express from 'express'
-import router from './routes/notesRoutes.js';
+import notesRoutes from './routes/notesRoutes.js';
+import { connectDB } from './config/db.js';
+
 
 
 const app = express()
 
-app.use("/api/notes", router)
+connectDB();
+
+app.use(express.json());
+
+app.use("/api/notes", notesRoutes)
 
 app.listen(5001, () => {
   console.log("server running on port: http://localhost:5001/");
