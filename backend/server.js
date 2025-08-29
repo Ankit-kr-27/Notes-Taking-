@@ -2,14 +2,18 @@ import express from 'express'
 import notesRoutes from './routes/notesRoutes.js';
 import { connectDB } from './config/db.js';
 import rateLimiter from './middleware/rateLimiter.js';
-
+import cors from 'cors'
 
 
 const app = express()
  
-
+app.use(
+  cors({
+    origin: "http://localhost:5173"
+  }))
 app.use(express.json()); //this will parse the json body
 app.use(rateLimiter)
+
 
 app.use("/api/notes", notesRoutes)
 
